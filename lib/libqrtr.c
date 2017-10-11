@@ -12,9 +12,16 @@
 #include "libqrtr.h"
 #include "ns.h"
 
+#ifndef ANDROID
 #define LOGW(fmt, ...) do { fprintf(stderr, "W|qrtr: " fmt "\n", ##__VA_ARGS__); } while (0)
 #define LOGE(fmt, ...) do { fprintf(stderr, "E|qrtr: " fmt "\n", ##__VA_ARGS__); } while (0)
 #define LOGE_errno(fmt, ...) do { fprintf(stderr, "E|qrtr: " fmt ": %s\n", ##__VA_ARGS__, strerror(errno)); } while (0)
+#else
+#include <log/log.h>
+#define LOGW(fmt, ...) do { __android_log_buf_print(LOG_ID_MAIN, ANDROID_LOG_WARN, "libqrtr", fmt, ##__VA_ARGS__); } while(0)
+#define LOGE(fmt, ...) do { __android_log_buf_print(LOG_ID_MAIN, ANDROID_LOG_ERROR, "libqrtr", fmt, ##__VA_ARGS__); } while(0)
+#define LOGE_errno(fmt, ...) do { __android_log_buf_print(LOG_ID_MAIN, ANDROID_LOG_ERROR, "libqrtr", fmt ": %s", ##__VA_ARGS__, strerror(errno)); } while(0)
+#endif
 
 static int qrtr_getname(int sock, struct sockaddr_msm_ipc *sq, uint32_t port)
 {
