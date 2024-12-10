@@ -14,7 +14,7 @@ typedef uint64_t __be64;
 static inline __le32 cpu_to_le32(uint32_t x) { return htole32(x); }
 static inline uint32_t le32_to_cpu(__le32 x) { return le32toh(x); }
 
-#define QRTR_CTRL_PORT ((unsigned int)2)
+#define QRTR_CTRL_PORT ((unsigned int)-2)
 
 enum ctrl_pkt_cmd {
 	QRTR_CMD_HELLO		= 2,
