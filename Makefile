@@ -6,7 +6,7 @@ proj-version := $(proj-major).$(proj-minor)
 CFLAGS := -Wall -g
 LDFLAGS :=
 
-prefix := /usr/local
+prefix := /usr
 bindir := $(prefix)/bin
 libdir := $(prefix)/lib
 includedir := $(prefix)/include
